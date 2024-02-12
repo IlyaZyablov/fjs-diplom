@@ -7,7 +7,7 @@ import { InjectModel } from '@nestjs/mongoose';
 import { Users } from './schema/users.schema';
 import mongoose, { Model } from 'mongoose';
 import { CreateUserDto } from './dto/create-user.dto';
-import { ID } from 'src/infrastructure/global';
+import { ID } from '../../infrastructure/global';
 
 @Injectable()
 export class UsersService {
@@ -19,7 +19,7 @@ export class UsersService {
   }
 
   async findAll(): Promise<Users[]> {
-    return this.usersModel.find().exec();
+    return this.usersModel.find().select('email name contactPhone'); // exec()
   }
 
   async findById(id: ID): Promise<Users> {

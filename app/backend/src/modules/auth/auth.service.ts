@@ -1,4 +1,5 @@
 import {
+  ConflictException,
   Injectable,
   NotFoundException,
   UnauthorizedException,
@@ -21,7 +22,7 @@ export class AuthService {
 
     const userData = await this.userService.findByEmail(email);
     if (userData) {
-      throw new UnauthorizedException(
+      throw new ConflictException(
         'Пользователь с указанным email уже существует!',
       );
     }
@@ -58,5 +59,11 @@ export class AuthService {
 
     const token = this.jwtService.sign({ email: userData.email });
     return { token };
+  }
+
+  checkAuth(): Promise<boolean> {
+    return new Promise((resolve) => {
+      resolve(true);
+    });
   }
 }
