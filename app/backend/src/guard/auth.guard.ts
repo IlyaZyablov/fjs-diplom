@@ -10,10 +10,12 @@ export class JwtAuthGuard extends AuthGuard('jwt') {
   public canActivate(context: ExecutionContext) {
     return super.canActivate(context);
   }
+
   public handleRequest(err, user) {
     if (err) {
       throw err;
     }
+
     if (!user) {
       throw new UnauthorizedException(
         'Доступно только для авторизованных пользователей',
