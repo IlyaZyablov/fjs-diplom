@@ -19,7 +19,7 @@ export class UsersService {
   }
 
   async findAll(): Promise<Users[]> {
-    return this.usersModel.find().select('email name contactPhone').exec();
+    return this.usersModel.find().select('email name contactPhone role').exec();
   }
 
   async findById(id: ID): Promise<Users> {

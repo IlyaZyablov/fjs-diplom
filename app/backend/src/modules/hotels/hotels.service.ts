@@ -69,6 +69,7 @@ export class HotelsService {
     return await this.hotelsModel
       .find(query)
       .limit(limit ?? 0)
-      .skip(offset ?? 0);
+      .skip(offset ?? 0)
+      .select('title description images');
   }
 }

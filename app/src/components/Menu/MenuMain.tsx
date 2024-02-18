@@ -1,28 +1,23 @@
 import { ListGroup } from "react-bootstrap"
-import { Link } from "react-router-dom"
+import { NavLink } from "react-router-dom"
 
 function MenuMain() {
   return (
     <ListGroup variant="flush" className="shadow-sm rounded text-center">
       <ListGroup.Item action>
-        <Link className="text-decoration-none text-secondary fw-semibold" to="/">
-          Все гостиницы
-        </Link>
-      </ListGroup.Item>
-      <ListGroup.Item action>
-        <Link className="text-decoration-none text-secondary fw-semibold" to="/find-hotels">
+        <NavLink className="text-decoration-none text-secondary fw-semibold" to="/">
           Поиск номера
-        </Link>
+        </NavLink>
       </ListGroup.Item>
       <ListGroup.Item action>
-        <Link className="text-decoration-none text-secondary fw-semibold" to="/add-hotels">
-          Добавить гостиницу
-        </Link>
+        <NavLink className="text-decoration-none text-secondary fw-semibold" to="/all-hotels">
+          Все гостиницы
+        </NavLink>
       </ListGroup.Item>
       <ListGroup.Item action>
-        <Link className="text-decoration-none text-secondary fw-semibold" to="/users">
+        <NavLink className="text-decoration-none text-secondary fw-semibold" to="/users">
           Пользователи
-        </Link>
+        </NavLink>
       </ListGroup.Item>
     </ListGroup>
   )

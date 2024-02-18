@@ -40,7 +40,7 @@ export class HotelsController {
   }
 
   @Put(':id')
-  // @UseGuards(JwtAuthGuard)
+  @UseGuards(JwtAuthGuard)
   @UseInterceptors(MulterFilesInterceptor())
   updateHotel(
     @Param('id') hotelId: ID,

@@ -1,6 +1,6 @@
 import { Container } from "react-bootstrap"
 import HotelsSearchForm from "./HotelsSearchForm"
-import HotelsList from "../HotelsList/HotelsList"
+import HotelsList from "../HotelsList/HotelsList";
 
 function HotelsSearch() {
   return (
