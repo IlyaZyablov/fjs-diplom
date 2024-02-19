@@ -16,11 +16,13 @@ export class HotelsService {
   constructor(@InjectModel(Hotels.name) private hotelsModel: Model<Hotels>) {}
 
   async create(createHotelDto: CreateHotelDto): Promise<Hotels> {
-    console.log('HotelService.create DEBUG');
-    console.log(createHotelDto);
-
-    const createdHotel = new this.hotelsModel(createHotelDto);
-    return createdHotel.save();
+    try {
+      const createdHotel = new this.hotelsModel(createHotelDto);
+      return createdHotel.save();
+    } catch (error) {
+      console.log('[ERROR]: HotelsService.create error:');
+      console.error(error);
+    }
   }
 
   async update(
@@ -28,20 +30,21 @@ export class HotelsService {
     updateHotelDto: UpdateHotelDto,
     images: string[],
   ): Promise<Hotels> {
-    console.log('HotelService.update DEBUG');
-    console.log(hotelId);
-    console.log(updateHotelDto);
-    console.log(images);
+    try {
+      // const hotel = await this.findById(hotelId);
 
-    const hotel = await this.findById(hotelId);
+      // const data = { ...updateHotelDto, images: [...hotel.images, ...images] };
+      const data = { ...updateHotelDto, images };
 
-    const data = { ...updateHotelDto, images: [...hotel.images, ...images] };
-
-    return await this.hotelsModel.findByIdAndUpdate(
-      { _id: hotelId },
-      { $set: { ...data } },
-      { new: true },
-    );
+      return await this.hotelsModel.findByIdAndUpdate(
+        { _id: hotelId },
+        { $set: { ...data } },
+        { new: true },
+      );
+    } catch (error) {
+      console.log('[ERROR]: HotelsService.update error:');
+      console.error(error);
+    }
   }
 
   async findById(hotelId: ID): Promise<Hotels> {
@@ -59,9 +62,6 @@ export class HotelsService {
   }
 
   async search(params: SearchParamsDto): Promise<Hotels[]> {
-    console.log('HotelService.search DEBUG');
-    console.log(params);
-
     const { limit, offset, title } = params;
     const query = {
       title: { $regex: new RegExp(title, 'i') },

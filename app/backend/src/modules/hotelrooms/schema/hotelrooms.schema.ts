@@ -10,6 +10,9 @@ export class HotelRooms {
   @Prop({ type: mongoose.Schema.Types.ObjectId, ref: 'Hotels', required: true })
   hotel: mongoose.Schema.Types.ObjectId;
 
+  @Prop({ required: true })
+  title: string;
+
   @Prop()
   description: string;
 

@@ -5,7 +5,7 @@ import HotelsList from "../HotelsList/HotelsList";
 function HotelsSearch() {
   return (
     <>
-      <Container className="bg-white rounded shadow-sm p-2">
+      <Container className="bg-white rounded shadow-sm p-2 mb-3">
         <Container>
           <p className="fs-2 fw-semibold">Поиск гостиницы</p>
           <HotelsSearchForm />

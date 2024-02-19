@@ -1,4 +1,4 @@
-import { IsArray, IsNotEmpty, IsOptional, IsString } from 'class-validator';
+import { IsNotEmpty, IsOptional, IsString } from 'class-validator';
 import { ID } from '../../../infrastructure/global';
 
 export class CreateRoomDto {
@@ -19,6 +19,5 @@ export class CreateRoomDto {
   readonly description?: string;
 
   @IsOptional()
-  @IsArray()
-  readonly images?: string[];
+  readonly images?: any;
 }

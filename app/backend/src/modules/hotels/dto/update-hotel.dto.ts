@@ -1,4 +1,4 @@
-import { IsArray, IsOptional, IsString } from 'class-validator';
+import { IsOptional, IsString } from 'class-validator';
 
 export class UpdateHotelDto {
   @IsOptional()
@@ -10,6 +10,5 @@ export class UpdateHotelDto {
   readonly description?: string;
 
   @IsOptional()
-  @IsArray()
-  readonly images?: string[];
+  readonly images?: any;
 }

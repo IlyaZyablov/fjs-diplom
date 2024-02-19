@@ -13,6 +13,15 @@ export interface HotelData {
   images: string[],
 }
 
+export interface HotelRoomData {
+  _id: string,
+  hotel: string;
+  title: string;
+  description: string;
+  images: string[];
+  isEnabled: boolean;
+}
+
 export interface RegData {
   email: string;
   name: string;
@@ -24,4 +33,12 @@ export interface SearchHotelsDto {
   limit?: number;
   offset?: number;
   title?: string;
+}
+
+export interface SearchRoomsDto {
+  hotel: string;
+  limit?: number;
+  offset?: number;
+  title?: string;
+  isEnabled?: boolean;
 }

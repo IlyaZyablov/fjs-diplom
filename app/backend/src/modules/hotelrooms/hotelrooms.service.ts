@@ -18,16 +18,23 @@ export class HotelroomsService {
   ) {}
 
   async create(createRoomDto: CreateRoomDto): Promise<HotelRooms> {
-    console.log('HotelroomsService.create DEBUG');
-    console.log(createRoomDto);
+    try {
+      const isValidId = mongoose.isValidObjectId(createRoomDto.hotel);
+      if (!isValidId) {
+        throw new BadRequestException('Некорректный ID отеля!');
+      }
 
-    const isValidId = mongoose.isValidObjectId(createRoomDto.hotel);
-    if (!isValidId) {
-      throw new BadRequestException('Некорректный ID отеля!');
+      const data = {
+        ...createRoomDto,
+        isEnabled: true,
+      };
+
+      const createdRoom = new this.hotelroomsModel(data);
+      return createdRoom.save();
+    } catch (error) {
+      console.log('[ERROR]: HotelroomsService.create error:');
+      console.error(error);
     }
-
-    const createdRoom = new this.hotelroomsModel(createRoomDto);
-    return createdRoom.save();
   }
 
   async update(
@@ -35,20 +42,21 @@ export class HotelroomsService {
     updateRoomDto: UpdateRoomDto,
     images: string[],
   ): Promise<HotelRooms> {
-    console.log('HotelroomsService.update DEBUG');
-    console.log(roomId);
-    console.log(updateRoomDto);
-    console.log(images);
+    try {
+      // const room = await this.findById(roomId);
 
-    const room = await this.findById(roomId);
+      // const data = { ...updateRoomDto, images: [...room.images, ...images] };
+      const data = { ...updateRoomDto, images };
 
-    const data = { ...updateRoomDto, images: [...room.images, ...images] };
-
-    return await this.hotelroomsModel.findByIdAndUpdate(
-      { _id: roomId },
-      { $set: { ...data } },
-      { new: true },
-    );
+      return await this.hotelroomsModel.findByIdAndUpdate(
+        { _id: roomId },
+        { $set: { ...data } },
+        { new: true },
+      );
+    } catch (error) {
+      console.log('[ERROR]: HotelroomsService.update error:');
+      console.error(error);
+    }
   }
 
   async findById(roomId: ID): Promise<HotelRooms> {
@@ -66,12 +74,10 @@ export class HotelroomsService {
   }
 
   async search(params: SearchRoomParamsDto): Promise<HotelRooms[]> {
-    console.log('HotelroomsService.search DEBUG');
-    console.log(params);
-
-    const { limit, offset, hotel, isEnabled } = params;
+    const { limit, offset, hotel, isEnabled, title } = params;
     const query: Partial<SearchRoomParamsDto> = {
       hotel,
+      title: { $regex: new RegExp(title, 'i') },
     };
 
     if (typeof isEnabled !== 'undefined') {

@@ -27,8 +27,8 @@ export class HotelsController {
   @UseGuards(JwtAuthGuard)
   @UseInterceptors(MulterFilesInterceptor())
   createHotel(
-    @Body() createHotelDto: CreateHotelDto,
     @UploadedFiles() images: Array<Express.Multer.File>,
+    @Body() createHotelDto: CreateHotelDto,
   ): Promise<Hotels> {
     const data = { ...createHotelDto };
 
@@ -57,5 +57,10 @@ export class HotelsController {
   @Get()
   searchHotels(@Query() searchParams: SearchParamsDto): Promise<Hotels[]> {
     return this.hotelsService.search(searchParams);
+  }
+
+  @Get('/findhotel/:id')
+  findById(@Param('id') hotelId: ID): Promise<Hotels> {
+    return this.hotelsService.findById(hotelId);
   }
 }

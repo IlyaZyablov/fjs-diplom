@@ -1,10 +1,11 @@
 import { Button, Col, Container, Row } from "react-bootstrap"
 import { HotelData } from "../../../types/interfaces";
 import HotelsListItemImgs from "./HotelsListItemImgs";
+import { Link } from "react-router-dom";
 
-function HotelsListItem({ hotel }: { hotel: HotelData }) { 
+function HotelsListItem({ hotel, showBtn }: { hotel: HotelData, showBtn: boolean }) {  
   return (
-    <Container className="bg-white rounded shadow-sm p-2 mt-3">
+    <Container className="bg-white rounded shadow-sm p-2 mb-3">
       <Container>
         <Row className="mt-2">
           <Col>
@@ -13,9 +14,12 @@ function HotelsListItem({ hotel }: { hotel: HotelData }) {
           <Col>
             <p className="fs-3 text-uppercase">{hotel.title}</p>
             <p className="text-muted">{hotel.description}</p>
-            <Button>
-              Подробнее
-            </Button>
+            
+            {showBtn === true &&
+              <Link to={`/hotel?id=${hotel._id}`} className="text-decoration-none">
+                <Button className="mb-2">Подробнее</Button>
+              </Link>
+            }
           </Col>
         </Row>
       </Container>
