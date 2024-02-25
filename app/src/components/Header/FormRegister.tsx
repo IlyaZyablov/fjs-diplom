@@ -47,7 +47,7 @@ function FormRegister() {
 
       authUser.register(regData)
         .then(result => {
-          dispatch(login({ token: result.data.token, role: result.data.role }));
+          dispatch(login({ token: result.data.token, role: result.data.role, id: result.data.id }));
           iziToast.success({
             message: 'Вы успешно зарегистрировались',
             position: 'bottomCenter',
@@ -61,7 +61,7 @@ function FormRegister() {
           });
         });
     } catch (error) {
-      console.log(error);
+      console.error(error);
     }
   }
 

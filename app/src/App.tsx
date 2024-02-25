@@ -20,6 +20,8 @@ import HotelPageMain from "./components/Hotels/HotelPage/HotelPageMain";
 import HotelsRoomsAddMain from "./components/Hotels/HotelsRoomsAdd/HotelsRoomsAddMain";
 import HotelsUpdateMain from "./components/Hotels/HotelsUpdate/HotelsUpdateMain";
 import HotelRoomUpdateMain from "./components/Hotels/HotelRoomUpdate/HotelRoomUpdateMain";
+import ReservationsMain from "./components/Reservations/ReservationsMain";
+import ReservationsForm from "./components/Reservations/ReservationsForm";
 
 function App() {
   const dispatch = useAppDispatch();
@@ -38,14 +40,14 @@ function App() {
         const { email } = JSON.parse(jsonPayload);
         authUser.getInfo(email)
           .then(result => {
-            dispatch(login({ token, role: result.data.role }));
+            dispatch(login({ token, role: result.data.role, id: result.data.id }));
           })
           .catch(() => {
             dispatch(logout());
           })
       }
     } catch (error) {
-      console.log(error);
+      console.error(error);
     }
   }
 
@@ -71,6 +73,8 @@ function App() {
               <Route path="/update-room" element={<HotelRoomUpdateMain />} />
               <Route path="/users" element={<UsersMain />} />
               <Route path="/hotel" element={<HotelPageMain />} />
+              <Route path="/reservations" element={<ReservationsMain />} />
+              <Route path="/reserve-room" element={<ReservationsForm />} />
               <Route path="*" element={<ErrorMain />} />
             </Routes>
           </Col>

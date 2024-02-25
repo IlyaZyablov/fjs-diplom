@@ -1,5 +1,12 @@
 import fetchData from './fetchData';
-import { RegData, SearchHotelsDto, SearchRoomsDto, SearchUsersDto } from '../types/interfaces';
+import {
+  RegData,
+  SearchHotelsDto,
+  SearchRoomsDto,
+  SearchUsersDto,
+  AddReservationDto,
+  SearchReservationsDto,
+} from '../types/interfaces';
 
 export default function useFetchData() {
   const usersApi = {
@@ -10,7 +17,7 @@ export default function useFetchData() {
     updateRole(id: string, role: string) {
       const result = fetchData(`users/${id}`, { method: 'PUT', data: { role } });
       return result;
-    }
+    },
   };
 
   const authUser = {
@@ -44,7 +51,7 @@ export default function useFetchData() {
     updateHotel(data: FormData, id: string) {
       const result = fetchData(`hotels/${id}`, { method: 'PUT', data }, true);
       return result;
-    }
+    },
   };
 
   const roomsApi = {
@@ -59,10 +66,25 @@ export default function useFetchData() {
     updateRoom(data: FormData, id: string) {
       const result = fetchData(`rooms/${id}`, { method: 'PUT', data }, true);
       return result;
-    }
+    },
   };
 
+  const reservationsApi = {
+    search(searchParams: SearchReservationsDto) {
+      const result = fetchData('reservations', { method: 'GET', params: searchParams });
+      return result;
+    },
+    addReservation(data: AddReservationDto) {
+      const result = fetchData('reservations', { method: 'POST', data });
+      return result;
+    },
+    removeReservation(reservationId: string, userId: string | null) {
+      const result = fetchData(`reservations/${reservationId}`, { method: 'DELETE', data: { userId } });
+      return result;
+    },
+  }
+
   return {
-    usersApi, authUser, hotelsAPI, roomsApi
+    usersApi, authUser, hotelsAPI, roomsApi, reservationsApi
   };
 }

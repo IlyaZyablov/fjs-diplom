@@ -9,6 +9,7 @@ import * as bcrypt from 'bcryptjs';
 import { JwtService } from '@nestjs/jwt';
 import { SignUpDto } from './dto/signup.dto';
 import { SignInDto } from './dto/signin.dto';
+import { ReturnDataDto } from './dto/returnData.dto';
 
 @Injectable()
 export class AuthService {
@@ -17,73 +18,60 @@ export class AuthService {
     private jwtService: JwtService,
   ) {}
 
-  async signUp(signUpDto: SignUpDto): Promise<{ token: string; role: string }> {
-    try {
-      const { email, password, name, contactPhone } = signUpDto;
+  async signUp(signUpDto: SignUpDto): Promise<ReturnDataDto> {
+    const { email, password, name, contactPhone } = signUpDto;
 
-      const userData = await this.userService.findByEmail(email);
-      if (userData) {
-        throw new ConflictException(
-          'Пользователь с указанным email уже существует!',
-        );
-      }
-
-      const passwordHash = await bcrypt.hash(password, 10);
-
-      const newUser = await this.userService.create({
-        email,
-        passwordHash,
-        name,
-        contactPhone: contactPhone || 'Не указан',
-      });
-
-      const token = this.jwtService.sign({ email: newUser.email });
-      return { token, role: newUser.role };
-    } catch (error) {
-      console.log('[ERROR]: AuthService.signUp error:');
-      console.error(error);
-    }
-  }
-
-  async signIn(signInDto: SignInDto): Promise<{ token: string; role: string }> {
-    try {
-      const { email, password } = signInDto;
-
-      const userData = await this.userService.findByEmail(email);
-      if (!userData) {
-        throw new NotFoundException('Неправильный email или пароль!');
-      }
-
-      const isPasswordMatched = await bcrypt.compare(
-        password,
-        userData.passwordHash,
+    const userData = await this.userService.findByEmail(email);
+    if (userData) {
+      throw new ConflictException(
+        'Пользователь с указанным email уже существует!',
       );
-
-      if (!isPasswordMatched) {
-        throw new UnauthorizedException('Неправильный email или пароль!');
-      }
-
-      const token = this.jwtService.sign({ email: userData.email });
-      return { token, role: userData.role };
-    } catch (error) {
-      console.log('[ERROR]: AuthService.signIn error:');
-      console.error(error);
     }
+
+    const passwordHash = await bcrypt.hash(password, 10);
+
+    const newUser = await this.userService.create({
+      email,
+      passwordHash,
+      name,
+      contactPhone: contactPhone || 'Не указан',
+    });
+
+    const token = this.jwtService.sign({ email: newUser.email });
+    return { token, role: newUser.role, id: newUser._id };
   }
 
-  async checkAuth(data: { email: string }): Promise<{ role: string }> {
-    try {
-      const { email } = data;
+  async signIn(signInDto: SignInDto): Promise<ReturnDataDto> {
+    const { email, password } = signInDto;
 
-      const userData = await this.userService.findByEmail(email);
-      if (!userData) {
-        throw new NotFoundException('Неправильный email или пароль!');
-      }
-
-      return { role: userData.role };
-    } catch (error) {
-      console.log('[ERROR]: AuthService.checkAuth error:');
-      console.error(error);
+    const userData = await this.userService.findByEmail(email);
+    if (!userData) {
+      throw new NotFoundException('Неправильный email или пароль!');
     }
+
+    const isPasswordMatched = await bcrypt.compare(
+      password,
+      userData.passwordHash,
+    );
+
+    if (!isPasswordMatched) {
+      throw new UnauthorizedException('Неправильный email или пароль!');
+    }
+
+    const token = this.jwtService.sign({ email: userData.email });
+    return { token, role: userData.role, id: userData._id };
+  }
+
+  async checkAuth(data: {
+    email: string;
+  }): Promise<{ role: string; id: string }> {
+    const { email } = data;
+
+    const userData = await this.userService.findByEmail(email);
+    if (!userData) {
+      throw new NotFoundException('Неправильный email или пароль!');
+    }
+
+    return { role: userData.role, id: userData._id };
   }
 }

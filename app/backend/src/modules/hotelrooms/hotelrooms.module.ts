@@ -12,5 +12,6 @@ import { HotelRooms, HotelRoomsSchema } from './schema/hotelrooms.schema';
   ],
   controllers: [HotelroomsController],
   providers: [HotelroomsService],
+  exports: [HotelroomsService],
 })
 export class HotelroomsModule {}

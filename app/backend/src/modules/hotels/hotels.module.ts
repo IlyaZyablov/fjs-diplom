@@ -10,5 +10,6 @@ import { Hotels, HotelsSchema } from './schema/hotels.schema';
   ],
   controllers: [HotelsController],
   providers: [HotelsService],
+  exports: [HotelsService],
 })
 export class HotelsModule {}

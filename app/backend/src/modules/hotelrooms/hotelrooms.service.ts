@@ -18,23 +18,18 @@ export class HotelroomsService {
   ) {}
 
   async create(createRoomDto: CreateRoomDto): Promise<HotelRooms> {
-    try {
-      const isValidId = mongoose.isValidObjectId(createRoomDto.hotel);
-      if (!isValidId) {
-        throw new BadRequestException('Некорректный ID отеля!');
-      }
-
-      const data = {
-        ...createRoomDto,
-        isEnabled: true,
-      };
-
-      const createdRoom = new this.hotelroomsModel(data);
-      return createdRoom.save();
-    } catch (error) {
-      console.log('[ERROR]: HotelroomsService.create error:');
-      console.error(error);
+    const isValidId = mongoose.isValidObjectId(createRoomDto.hotel);
+    if (!isValidId) {
+      throw new BadRequestException('Некорректный ID отеля!');
     }
+
+    const data = {
+      ...createRoomDto,
+      isEnabled: true,
+    };
+
+    const createdRoom = new this.hotelroomsModel(data);
+    return createdRoom.save();
   }
 
   async update(
@@ -42,21 +37,16 @@ export class HotelroomsService {
     updateRoomDto: UpdateRoomDto,
     images: string[],
   ): Promise<HotelRooms> {
-    try {
-      // const room = await this.findById(roomId);
+    // const room = await this.findById(roomId);
 
-      // const data = { ...updateRoomDto, images: [...room.images, ...images] };
-      const data = { ...updateRoomDto, images };
+    // const data = { ...updateRoomDto, images: [...room.images, ...images] };
+    const data = { ...updateRoomDto, images };
 
-      return await this.hotelroomsModel.findByIdAndUpdate(
-        { _id: roomId },
-        { $set: { ...data } },
-        { new: true },
-      );
-    } catch (error) {
-      console.log('[ERROR]: HotelroomsService.update error:');
-      console.error(error);
-    }
+    return await this.hotelroomsModel.findByIdAndUpdate(
+      { _id: roomId },
+      { $set: { ...data } },
+      { new: true },
+    );
   }
 
   async findById(roomId: ID): Promise<HotelRooms> {

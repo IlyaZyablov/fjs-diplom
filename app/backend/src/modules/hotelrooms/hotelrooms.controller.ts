@@ -18,15 +18,18 @@ import { HotelRooms } from './schema/hotelrooms.schema';
 import { ID } from '../../infrastructure/global';
 import { UpdateRoomDto } from './dto/update-room.dto';
 import { SearchRoomParamsDto } from './dto/search-room.dto';
+import { RolesGuard } from '../../guard/roles.guard';
+import { Roles } from '../../decorators/roles.decorator';
 
 @Controller('api/rooms')
 export class HotelroomsController {
   constructor(private hotelroomsService: HotelroomsService) {}
 
   @Post()
-  @UseGuards(JwtAuthGuard)
+  @UseGuards(JwtAuthGuard, RolesGuard)
+  @Roles('admin')
   @UseInterceptors(MulterFilesInterceptor())
-  createHotel(
+  createRoom(
     @Body() createRoomDto: CreateRoomDto,
     @UploadedFiles() images: Array<Express.Multer.File>,
   ): Promise<HotelRooms> {
@@ -40,9 +43,10 @@ export class HotelroomsController {
   }
 
   @Put(':id')
-  @UseGuards(JwtAuthGuard)
+  @UseGuards(JwtAuthGuard, RolesGuard)
+  @Roles('admin')
   @UseInterceptors(MulterFilesInterceptor())
-  updateHotel(
+  updateRoom(
     @Param('id') roomId: ID,
     @Body() updateRoomDto: UpdateRoomDto,
     @UploadedFiles() images: Array<Express.Multer.File>,

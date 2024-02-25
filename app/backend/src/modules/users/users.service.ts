@@ -59,13 +59,8 @@ export class UsersService {
   }
 
   async updateRole(userId: ID, role: string): Promise<Users> {
-    try {
-      return await this.usersModel
-        .findByIdAndUpdate({ _id: userId }, { $set: { role } }, { new: true })
-        .select('email');
-    } catch (error) {
-      console.log('[ERROR]: UsersService.updateRole error:');
-      console.error(error);
-    }
+    return await this.usersModel
+      .findByIdAndUpdate({ _id: userId }, { $set: { role } }, { new: true })
+      .select('email');
   }
 }

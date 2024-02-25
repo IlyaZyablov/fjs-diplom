@@ -23,7 +23,7 @@ function UsersSearchForm() {
 
       dispatch(setUsersState(searchData));
     } catch (error) {
-      console.log(error);
+      console.error(error);
     }
   }
 

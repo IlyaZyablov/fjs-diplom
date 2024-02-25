@@ -13,7 +13,7 @@ function HotelsSearchForm() {
 
       dispatch(setHotelsState({ offset: 0, titleSearch: title }));
     } catch (error) {
-      console.log(error);
+      console.error(error);
     }
   }
 

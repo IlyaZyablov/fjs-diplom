@@ -20,9 +20,12 @@ function HotelRoomsItem({ room }: { room: HotelRoomData }) {
           <Col>
             <p className="fs-3 text-uppercase">{room.title}</p>
             <p className="text-muted">{room.description}</p>
+            <Link to={'/reserve-room'} className="text-decoration-none m-1">
+              <Button onClick={() => dispatch(setRoomsState({ currentRoom: room }))}>Забронировать</Button>
+            </Link>
             {role === 'admin' && 
-              <Link to={'/update-room'} className="text-decoration-none">
-                <Button variant="warning" className="mb-2" onClick={() => dispatch(setRoomsState({ currentRoom: room }))}>Редактировать</Button>
+              <Link to={'/update-room'} className="text-decoration-none m-1">
+                <Button variant="warning" onClick={() => dispatch(setRoomsState({ currentRoom: room }))}>Редактировать</Button>
               </Link>
             }
           </Col>

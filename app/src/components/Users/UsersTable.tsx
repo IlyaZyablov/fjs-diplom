@@ -4,6 +4,7 @@ import { useAppDispatch, useAppSelector } from "../../store/hooks";
 import { setUsersState } from "../../store/users/usersSlice";
 import useFetchData from "../../api/useFetchData";
 import iziToast from "izitoast";
+import { Link } from "react-router-dom";
 
 interface propData {
   list: UserData[],
@@ -23,7 +24,7 @@ function UsersTable(data: propData) {
         dispatch(setUsersState({ offset: usersState.offset - usersState.limit }));
       }
     } catch (error) {
-      console.log(error);
+      console.error(error);
     }
   }
 
@@ -44,7 +45,7 @@ function UsersTable(data: propData) {
           });
         });
     } catch (error) {
-      console.log(error);
+      console.error(error);
     }
   }
 
@@ -68,7 +69,9 @@ function UsersTable(data: propData) {
               <td>{elem.email}</td>
               <td>{elem.role}</td>
               <td>
-                <Button variant="warning" className="m-1">Бронирования</Button>
+                <Link to={`/reservations?id=${elem._id}`} className="text-decoration-none">
+                  <Button variant="warning" className="mb-1">Бронирования</Button>
+                </Link>
                 <DropdownButton title="Выдать роль">
                   <Dropdown.Item onClick={() => handleChangeRole(elem._id, 'client')}>Клиент</Dropdown.Item>
                   <Dropdown.Item onClick={() => handleChangeRole(elem._id, 'manager')}>Менеджер</Dropdown.Item>

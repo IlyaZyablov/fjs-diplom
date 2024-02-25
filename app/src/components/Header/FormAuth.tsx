@@ -35,7 +35,7 @@ function FormAuth() {
 
       authUser.login(email, password)
         .then(result => {
-          dispatch(login({ token: result.data.token, role: result.data.role }));
+          dispatch(login({ token: result.data.token, role: result.data.role, id: result.data.id }));
           iziToast.success({
             message: 'Вы успешно авторизовались в системе',
             position: 'bottomCenter',
@@ -49,7 +49,7 @@ function FormAuth() {
           });
         });
     } catch (error) {
-      console.log(error);
+      console.error(error);
     }
   }
 

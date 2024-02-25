@@ -21,7 +21,7 @@ function HotelRoomsItems(data: propData) {
         dispatch(setHotelsState({ offset: roomsState.offset - roomsState.limit }));
       }
     } catch (error) {
-      console.log(error);
+      console.error(error);
     }
   }
   

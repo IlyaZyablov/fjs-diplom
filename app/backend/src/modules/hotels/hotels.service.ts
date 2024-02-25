@@ -30,21 +30,16 @@ export class HotelsService {
     updateHotelDto: UpdateHotelDto,
     images: string[],
   ): Promise<Hotels> {
-    try {
-      // const hotel = await this.findById(hotelId);
+    // const hotel = await this.findById(hotelId);
 
-      // const data = { ...updateHotelDto, images: [...hotel.images, ...images] };
-      const data = { ...updateHotelDto, images };
+    // const data = { ...updateHotelDto, images: [...hotel.images, ...images] };
+    const data = { ...updateHotelDto, images };
 
-      return await this.hotelsModel.findByIdAndUpdate(
-        { _id: hotelId },
-        { $set: { ...data } },
-        { new: true },
-      );
-    } catch (error) {
-      console.log('[ERROR]: HotelsService.update error:');
-      console.error(error);
-    }
+    return await this.hotelsModel.findByIdAndUpdate(
+      { _id: hotelId },
+      { $set: { ...data } },
+      { new: true },
+    );
   }
 
   async findById(hotelId: ID): Promise<Hotels> {

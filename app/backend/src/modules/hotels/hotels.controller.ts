@@ -18,13 +18,16 @@ import { UpdateHotelDto } from './dto/update-hotel.dto';
 import { JwtAuthGuard } from 'src/guard/auth.guard';
 import { SearchParamsDto } from './dto/search-hotel.dto';
 import { MulterFilesInterceptor } from 'src/interceptors/fileUpload.interceptor';
+import { RolesGuard } from '../../guard/roles.guard';
+import { Roles } from '../../decorators/roles.decorator';
 
 @Controller('api/hotels')
 export class HotelsController {
   constructor(private hotelsService: HotelsService) {}
 
   @Post()
-  @UseGuards(JwtAuthGuard)
+  @UseGuards(JwtAuthGuard, RolesGuard)
+  @Roles('admin')
   @UseInterceptors(MulterFilesInterceptor())
   createHotel(
     @UploadedFiles() images: Array<Express.Multer.File>,
@@ -40,7 +43,8 @@ export class HotelsController {
   }
 
   @Put(':id')
-  @UseGuards(JwtAuthGuard)
+  @UseGuards(JwtAuthGuard, RolesGuard)
+  @Roles('admin')
   @UseInterceptors(MulterFilesInterceptor())
   updateHotel(
     @Param('id') hotelId: ID,
