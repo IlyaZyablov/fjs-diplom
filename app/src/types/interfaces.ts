@@ -42,3 +42,11 @@ export interface SearchRoomsDto {
   title?: string;
   isEnabled?: boolean;
 }
+
+export interface SearchUsersDto {
+  limit: number;
+  offset: number;
+  email: string;
+  name: string;
+  contactPhone: string;
+}

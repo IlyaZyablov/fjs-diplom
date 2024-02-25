@@ -1,26 +1,17 @@
-import { useState } from 'react';
 import fetchData from './fetchData';
-import { RegData, SearchHotelsDto, SearchRoomsDto } from '../types/interfaces';
+import { RegData, SearchHotelsDto, SearchRoomsDto, SearchUsersDto } from '../types/interfaces';
 
 export default function useFetchData() {
-  const [usersLoading, setUsersLoading] = useState(true);
-
-  const usersDB = {
-    loading: usersLoading,
-    getInfo() {
-      setUsersLoading(true);
-  
-      const result = fetchData('users/findall', { method: 'GET' }, false, () => setUsersLoading(false));
+  const usersApi = {
+    search(searchParams: Partial<SearchUsersDto>) {
+      const result = fetchData('users', { method: 'GET', params: searchParams });
       return result;
     },
-  };
-
-  const authCheck = {
-    getInfo(email: string) {
-      const result = fetchData('auth/checkauth', { method: 'GET', params: { email } });
+    updateRole(id: string, role: string) {
+      const result = fetchData(`users/${id}`, { method: 'PUT', data: { role } });
       return result;
     }
-  }
+  };
 
   const authUser = {
     login(email: string, password: string) {
@@ -30,7 +21,11 @@ export default function useFetchData() {
     register(data: RegData) {
       const result = fetchData('auth/signup', { method: 'POST', data });
       return result;
-    }
+    },
+    getInfo(email: string) {
+      const result = fetchData('auth/checkauth', { method: 'GET', params: { email } });
+      return result;
+    },
   }
 
   const hotelsAPI = {
@@ -68,6 +63,6 @@ export default function useFetchData() {
   };
 
   return {
-    usersDB, authCheck, authUser, hotelsAPI, roomsApi
+    usersApi, authUser, hotelsAPI, roomsApi
   };
 }

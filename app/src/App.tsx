@@ -23,7 +23,7 @@ import HotelRoomUpdateMain from "./components/Hotels/HotelRoomUpdate/HotelRoomUp
 
 function App() {
   const dispatch = useAppDispatch();
-  const { authCheck } = useFetchData();
+  const { authUser } = useFetchData();
 
   const checkAuth = async () => {
     const token = getToken();
@@ -36,7 +36,7 @@ function App() {
             return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
         }).join(''));
         const { email } = JSON.parse(jsonPayload);
-        authCheck.getInfo(email)
+        authUser.getInfo(email)
           .then(result => {
             dispatch(login({ token, role: result.data.role }));
           })

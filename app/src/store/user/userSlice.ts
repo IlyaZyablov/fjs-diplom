@@ -24,8 +24,7 @@ const userSlice = createSlice({
       state.role = action.payload.role;
     },
     logout: (state) => {
-      state.token = null;
-      state.isAuth = false;
+      state = initialState;
       removeToken();
     },
   }

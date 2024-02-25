@@ -8,6 +8,7 @@ import { Users } from './schema/users.schema';
 import mongoose, { Model } from 'mongoose';
 import { CreateUserDto } from './dto/create-user.dto';
 import { ID } from '../../infrastructure/global';
+import { SearchUsersDto } from './dto/search-user.dto';
 
 @Injectable()
 export class UsersService {
@@ -23,8 +24,18 @@ export class UsersService {
     }
   }
 
-  async findAll(): Promise<Users[]> {
-    return this.usersModel.find().select('email name contactPhone role').exec();
+  async findAll(params: Partial<SearchUsersDto>): Promise<Users[]> {
+    const { limit, offset, email, name, contactPhone } = params;
+    const query = {
+      email: { $regex: new RegExp(email, 'i') },
+      name: { $regex: new RegExp(name, 'i') },
+      contactPhone: { $regex: new RegExp(contactPhone, 'i') },
+    };
+    return this.usersModel
+      .find(query)
+      .limit(limit ?? 0)
+      .skip(offset ?? 0)
+      .select('email name contactPhone role');
   }
 
   async findById(id: ID): Promise<Users> {
@@ -45,5 +56,16 @@ export class UsersService {
     const user = await this.usersModel.findOne({ email });
 
     return user;
+  }
+
+  async updateRole(userId: ID, role: string): Promise<Users> {
+    try {
+      return await this.usersModel
+        .findByIdAndUpdate({ _id: userId }, { $set: { role } }, { new: true })
+        .select('email');
+    } catch (error) {
+      console.log('[ERROR]: UsersService.updateRole error:');
+      console.error(error);
+    }
   }
 }
