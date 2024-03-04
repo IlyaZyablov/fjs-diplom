@@ -1,29 +1,18 @@
 import { useState } from "react";
-import { Button, Container } from "react-bootstrap";
-import { Link } from "react-router-dom";
+import { Container } from "react-bootstrap";
 import { useAuth } from "../../hooks/useAuth";
-import { useAppSelector } from "../../store/hooks";
-import ButtonLogout from "./ButtonLogout";
 import FormAuth from "./FormAuth";
 import FormRegister from "./FormRegister";
+import HeaderProfile from "./HeaderProfile";
 
 function HeaderAuth() {
   const isAuth = useAuth();
   const [authForm, setAuthForm] = useState(true);
-  const userId = useAppSelector(state => state.user.id)
 
   return (
     <Container>
       {isAuth === true ? (
-        <div className="d-flex flex-column">
-          <Link to={`/reservations?id=${userId}`} className="mb-1 text-decoration-none">
-            <Button variant="primary" >
-              Мои брони
-            </Button>
-          </Link>
-          <ButtonLogout />
-        </div>
-        
+        <HeaderProfile />
       ) : (
         authForm === true ? (
           <>

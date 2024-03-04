@@ -3,7 +3,9 @@ import { useEffect, useState } from "react";
 import { Button, Container } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import useFetchData from "../../api/useFetchData";
+import { useSocketEvent } from "../../hooks/useSocketEvent";
 import { useAppSelector } from "../../store/hooks";
+import { SocketDto } from "../../types/interfaces";
 import LoaderMain from "../Loader/LoaderMain";
 import ChatForm from "./ChatForm";
 import ChatMessages from "./ChatMessages";
@@ -16,6 +18,19 @@ function ChatMain() {
   const queryParams = new URLSearchParams(location.search);
   const navigate = useNavigate();
   const { supportRequestApi } = useFetchData();
+
+  const listener = (socketDto: SocketDto) => {
+    console.log(socketDto);
+    if (user.id !== socketDto.author.id) {
+      setMessages([...messages, {
+        _id: socketDto._id,
+        authorId: socketDto.author.id,
+        text: socketDto.text,
+        sentAt: socketDto.sentAt,
+      }])
+    }
+  };
+  useSocketEvent('subscribeToChat', listener);
 
   const handleSendMessage = (text: string) => {
     try {

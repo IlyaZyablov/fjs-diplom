@@ -1,43 +1,23 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { socket } from '../../socket/SocketClient';
-import { MessageData } from '../../types/interfaces';
 
-export interface OnSubscribeToChatMessage {
-  supportReqID: string,
-  message: MessageData,
-}
-
-export interface SocketIOState {
-  isConnected: boolean,
-  subscribeToChatEvents: OnSubscribeToChatMessage[],
-  errorEvents: Function[],
+interface SocketIOState {
+  isConnected: boolean;
 }
 
 const initialState: SocketIOState = {
-  isConnected: socket.connected,
-  subscribeToChatEvents: [],
-  errorEvents: [],
-};
+  isConnected: false,
+}
 
 const socketSlice = createSlice({
   name: 'socketIO',
   initialState,
   reducers: {
-    onConnectSocket: (state: SocketIOState) => {
-      state.isConnected = true; 
+    setConnectedStatus: (state, action: PayloadAction<{ isConnected: boolean }>) => {
+      Object.assign(state, action.payload);
     },
-    onDisconnectSocket: (state: SocketIOState) => {
-      state.isConnected = false; 
-    },
-    onSubscribeToChatEvents: (state: SocketIOState, { payload }: PayloadAction<OnSubscribeToChatMessage>): void => {
-      state.subscribeToChatEvents = [...state.subscribeToChatEvents, payload];
-    },
-    onErrorEvents: (state: SocketIOState, { payload }: PayloadAction<Function>): void => {
-      state.errorEvents = [...state.errorEvents, payload];
-    },
-  },
+  }
 })
 
-export const { onConnectSocket, onDisconnectSocket, onSubscribeToChatEvents, onErrorEvents } = socketSlice.actions
+export const { setConnectedStatus } = socketSlice.actions
 
 export default socketSlice.reducer

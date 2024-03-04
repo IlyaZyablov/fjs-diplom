@@ -5,6 +5,7 @@ import SupportList from "./SupportList";
 
 function SupportMain() {
   const user = useAppSelector(state => state.user);
+
   return (
     <Container className="bg-white rounded shadow-sm p-2">
       <Container>

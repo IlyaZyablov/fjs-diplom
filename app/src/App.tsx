@@ -28,7 +28,6 @@ import { login, logout } from "./store/user/userSlice";
 
 function App() {
   SocketClient();
-
   const dispatch = useAppDispatch();
   const { authUser } = useFetchData();
 

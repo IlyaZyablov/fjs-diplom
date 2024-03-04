@@ -2,12 +2,12 @@ import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { EventEmitterModule } from '@nestjs/event-emitter';
 import { MongooseModule } from '@nestjs/mongoose';
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
+import { AppGateway } from './app.gateway';
 import { AuthModule } from './modules/auth/auth.module';
 import { HotelroomsModule } from './modules/hotelrooms/hotelrooms.module';
 import { HotelsModule } from './modules/hotels/hotels.module';
 import { ReservationsModule } from './modules/reservations/reservations.module';
+import { SocketModule } from './modules/socket/socket.module';
 import { SupportModule } from './modules/support/support.module';
 import { UsersModule } from './modules/users/users.module';
 
@@ -30,8 +30,9 @@ import { UsersModule } from './modules/users/users.module';
     HotelroomsModule,
     ReservationsModule,
     SupportModule,
+    SocketModule,
   ],
-  controllers: [AppController],
-  providers: [AppService],
+  controllers: [],
+  providers: [AppGateway],
 })
 export class AppModule {}

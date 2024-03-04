@@ -13,6 +13,7 @@ import { GetChatListParams } from './dto/get-requests.dto';
 import { SendMessageDto } from './dto/send-message.dto';
 import { Message } from './schemas/message.schema';
 import { Support } from './schemas/support.schema';
+import { SocketService } from '../socket/socket.service';
 
 @Injectable()
 export class SupportService {
@@ -20,6 +21,7 @@ export class SupportService {
     @InjectModel(Support.name) private supportModel: Model<Support>,
     @InjectModel(Message.name) private messageModel: Model<Message>,
     private usersService: UsersService,
+    private socketService: SocketService,
     private eventEmitter: EventEmitter2,
   ) {}
 
@@ -78,6 +80,9 @@ export class SupportService {
       await supportRequest.save();
 
       this.eventEmitter.emit('newMessage', { supportRequest, message });
+      this.socketService.server
+        .to(String(supportRequestId))
+        .emit('subscribeToChat', { supportRequestId, message });
 
       return message;
     } catch (error) {

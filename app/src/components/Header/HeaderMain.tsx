@@ -1,6 +1,7 @@
 import { Button, Container, Navbar, OverlayTrigger, Popover } from "react-bootstrap"
 import { Link } from "react-router-dom"
 import HeaderAuth from "./HeaderAuth"
+import SocketHiddenDiv from "./SocketHiddenDiv"
 
 function HeaderMain() {
   return (
@@ -31,6 +32,7 @@ function HeaderMain() {
           </Navbar.Collapse>
         </Container>
       </Navbar>
+      <SocketHiddenDiv />
     </Container>
   )
 }

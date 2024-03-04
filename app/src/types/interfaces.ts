@@ -109,3 +109,13 @@ export interface MessageData {
   sentAt: Date;
   readAt: Date;
 }
+
+export interface SocketDto {
+  _id: string;
+  text: string;
+  sentAt: string;
+  author: {
+    id: string;
+    name: string;
+  };
+}
