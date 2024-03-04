@@ -25,15 +25,7 @@ export class SupportGateway {
     @MessageBody() payload: { chatId: ID },
     @ConnectedSocket() client: Socket,
   ) {
-    console.log('handleSubscribeToChat DEBUG');
-    console.log(payload);
-
     return this.supportService.subscribe(async (supportRequest, message) => {
-      console.log('this.supportService.subscribe DEBUG');
-      console.log(supportRequest._id.toString());
-      console.log('payload.chatId DEBUG');
-      console.log(payload.chatId);
-
       if (supportRequest._id.toString() === payload.chatId) {
         const { _id, sentAt, text, readAt, authorId } = message;
         const { _id: userId, name } =
