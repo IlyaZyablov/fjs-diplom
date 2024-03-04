@@ -5,13 +5,13 @@ import {
   NotFoundException,
 } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
-import { Reservations } from './schema/reservations.schema';
 import mongoose, { Model } from 'mongoose';
-import { ReservationDto } from './dto/reservation.dto';
 import { ID } from '../../infrastructure/global';
-import { UsersService } from '../users/users.service';
-import { HotelsService } from '../hotels/hotels.service';
 import { HotelroomsService } from '../hotelrooms/hotelrooms.service';
+import { HotelsService } from '../hotels/hotels.service';
+import { UsersService } from '../users/users.service';
+import { ReservationDto } from './dto/reservation.dto';
+import { Reservations } from './schema/reservations.schema';
 
 @Injectable()
 export class ReservationsService {
@@ -60,8 +60,13 @@ export class ReservationsService {
       );
     }
 
-    const createdReservation = new this.reservationsModel(reservationDto);
-    return createdReservation.save();
+    try {
+      const createdReservation = new this.reservationsModel(reservationDto);
+      return createdReservation.save();
+    } catch (error) {
+      console.log('[ERROR]: ReservationsService.addReservation error:');
+      console.error(error);
+    }
   }
 
   async removeReservation(

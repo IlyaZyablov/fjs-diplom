@@ -1,8 +1,8 @@
 import iziToast from "izitoast";
 import { useState } from "react";
-import { Button, Form } from "react-bootstrap"
-import useFetchData from "../../../api/useFetchData";
+import { Button, Form } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
+import useFetchData from "../../../api/useFetchData";
 import { useAppSelector } from "../../../store/hooks";
 
 function HotelRoomsAddForm() {

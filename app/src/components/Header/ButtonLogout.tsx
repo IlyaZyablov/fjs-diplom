@@ -1,8 +1,8 @@
-import { Button } from "react-bootstrap";
-import { useAppDispatch } from "../../store/hooks";
-import { useNavigate } from "react-router-dom";
-import { logout } from "../../store/user/userSlice";
 import iziToast from "izitoast";
+import { Button } from "react-bootstrap";
+import { useNavigate } from "react-router-dom";
+import { useAppDispatch } from "../../store/hooks";
+import { logout } from "../../store/user/userSlice";
 
 function ButtonLogout() {
   const dispatch = useAppDispatch();

@@ -1,7 +1,7 @@
-import { Container, Pagination } from "react-bootstrap"
-import { HotelRoomData } from "../../../types/interfaces";
+import { Container, Pagination } from "react-bootstrap";
 import { useAppDispatch, useAppSelector } from "../../../store/hooks";
 import { setHotelsState } from "../../../store/hotels/hotelsSlice";
+import { HotelRoomData } from "../../../types/interfaces";
 import HotelRoomsItem from "./HotelRoomsItem";
 
 interface propData {

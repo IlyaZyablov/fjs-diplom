@@ -1,7 +1,7 @@
-import * as path from 'path';
 import { NestInterceptor, Type } from '@nestjs/common';
 import { FilesInterceptor } from '@nestjs/platform-express';
 import { diskStorage } from 'multer';
+import * as path from 'path';
 
 export function MulterFilesInterceptor(): Type<NestInterceptor> {
   return FilesInterceptor('images', 10, {

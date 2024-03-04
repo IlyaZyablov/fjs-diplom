@@ -1,10 +1,10 @@
-import { Button, Col, Container, Row } from "react-bootstrap"
-import { HotelRoomData } from "../../../types/interfaces";
-import HotelRoomsItemImgs from "./HotelRoomsItemImgs";
+import { Button, Col, Container, Row } from "react-bootstrap";
+import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import { useAppSelector } from "../../../store/hooks";
-import { useDispatch } from "react-redux";
 import { setRoomsState } from "../../../store/rooms/roomsSlice";
+import { HotelRoomData } from "../../../types/interfaces";
+import HotelRoomsItemImgs from "./HotelRoomsItemImgs";
 
 function HotelRoomsItem({ room }: { room: HotelRoomData }) {
   const role = useAppSelector(state => state.user.role);

@@ -1,10 +1,10 @@
+import iziToast from "izitoast";
 import { useState } from "react";
 import { Button, Form } from "react-bootstrap";
+import { useNavigate } from "react-router-dom";
 import useFetchData from "../../api/useFetchData";
-import iziToast from "izitoast";
 import { useAppDispatch } from "../../store/hooks";
 import { login } from "../../store/user/userSlice";
-import { useNavigate } from "react-router-dom";
 
 function FormAuth() {
   const [email, setEmail] = useState<string>('');

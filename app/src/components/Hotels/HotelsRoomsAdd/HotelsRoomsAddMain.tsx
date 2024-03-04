@@ -1,6 +1,6 @@
-import { Container } from "react-bootstrap"
-import HotelRoomsAddForm from "./HotelRoomsAddForm"
+import { Container } from "react-bootstrap";
 import { useAppSelector } from "../../../store/hooks";
+import HotelRoomsAddForm from "./HotelRoomsAddForm";
 
 function HotelsRoomsAddMain() {
   const currentHotel = useAppSelector(state => state.hotels.currentHotel);

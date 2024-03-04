@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Button, Form } from "react-bootstrap"
+import { Button, Form } from "react-bootstrap";
 import { useAppDispatch } from "../../../store/hooks";
 import { setHotelsState } from "../../../store/hotels/hotelsSlice";
 

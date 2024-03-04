@@ -1,11 +1,11 @@
-import { Button, Container } from "react-bootstrap"
-import { useAuth } from "../../hooks/useAuth"
-import ButtonLogout from "./ButtonLogout";
 import { useState } from "react";
+import { Button, Container } from "react-bootstrap";
+import { Link } from "react-router-dom";
+import { useAuth } from "../../hooks/useAuth";
+import { useAppSelector } from "../../store/hooks";
+import ButtonLogout from "./ButtonLogout";
 import FormAuth from "./FormAuth";
 import FormRegister from "./FormRegister";
-import { Link } from "react-router-dom";
-import { useAppSelector } from "../../store/hooks";
 
 function HeaderAuth() {
   const isAuth = useAuth();

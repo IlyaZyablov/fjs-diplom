@@ -1,9 +1,9 @@
-import { Container } from "react-bootstrap"
-import UsersList from "./UsersList"
-import UsersSearchForm from "./UsersSearchForm"
-import { useAppDispatch, useAppSelector } from "../../store/hooks";
 import { useEffect } from "react";
+import { Container } from "react-bootstrap";
+import { useAppDispatch, useAppSelector } from "../../store/hooks";
 import { setUsersState } from "../../store/users/usersSlice";
+import UsersList from "./UsersList";
+import UsersSearchForm from "./UsersSearchForm";
 
 function UsersMain() {
   const dispatch = useAppDispatch();

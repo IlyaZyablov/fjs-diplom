@@ -1,9 +1,9 @@
+import { useEffect } from "react"
 import { Button, Container, Stack } from "react-bootstrap"
 import { Link } from "react-router-dom"
-import HotelsList from "./HotelsList"
-import { useEffect } from "react"
 import { useAppDispatch, useAppSelector } from "../../../store/hooks"
 import { setHotelsState } from "../../../store/hotels/hotelsSlice"
+import HotelsList from "./HotelsList"
 
 function HotelsListMain() {
   const dispatch = useAppDispatch();

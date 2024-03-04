@@ -1,8 +1,8 @@
-import { Container, Pagination } from "react-bootstrap"
-import HotelsListItem from "./HotelsListItem"
-import { HotelData } from "../../../types/interfaces";
+import { Container, Pagination } from "react-bootstrap";
 import { useAppDispatch, useAppSelector } from "../../../store/hooks";
 import { setHotelsState } from "../../../store/hotels/hotelsSlice";
+import { HotelData } from "../../../types/interfaces";
+import HotelsListItem from "./HotelsListItem";
 
 interface propData {
   list: HotelData[],

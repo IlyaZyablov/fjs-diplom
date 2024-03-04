@@ -1,8 +1,8 @@
+import iziToast from "izitoast";
 import { useEffect, useState } from "react";
 import useFetchData from "../../api/useFetchData";
 import { useAppDispatch, useAppSelector } from "../../store/hooks";
 import { setUsersState } from "../../store/users/usersSlice";
-import iziToast from "izitoast";
 import LoaderMain from "../Loader/LoaderMain";
 import UsersTable from "./UsersTable";
 

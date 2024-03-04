@@ -1,11 +1,11 @@
-import { Container } from "react-bootstrap";
-import LoaderMain from "../../Loader/LoaderMain";
+import iziToast from "izitoast";
 import { useEffect, useState } from "react";
+import { Container } from "react-bootstrap";
 import useFetchData from "../../../api/useFetchData";
 import { useAppDispatch, useAppSelector } from "../../../store/hooks";
-import HotelRoomsItems from "./HotelRoomsItems";
 import { setRoomsState } from "../../../store/rooms/roomsSlice";
-import iziToast from "izitoast";
+import LoaderMain from "../../Loader/LoaderMain";
+import HotelRoomsItems from "./HotelRoomsItems";
 
 function HotelRoomsList() {
   const [error, setError] = useState<boolean>(false);

@@ -10,16 +10,16 @@ import {
   UseGuards,
   UseInterceptors,
 } from '@nestjs/common';
-import { HotelsService } from './hotels.service';
-import { CreateHotelDto } from './dto/create-hotel.dto';
-import { Hotels } from './schema/hotels.schema';
-import { ID } from '../../infrastructure/global';
-import { UpdateHotelDto } from './dto/update-hotel.dto';
 import { JwtAuthGuard } from 'src/guard/auth.guard';
-import { SearchParamsDto } from './dto/search-hotel.dto';
 import { MulterFilesInterceptor } from 'src/interceptors/fileUpload.interceptor';
-import { RolesGuard } from '../../guard/roles.guard';
 import { Roles } from '../../decorators/roles.decorator';
+import { RolesGuard } from '../../guard/roles.guard';
+import { ID } from '../../infrastructure/global';
+import { CreateHotelDto } from './dto/create-hotel.dto';
+import { SearchParamsDto } from './dto/search-hotel.dto';
+import { UpdateHotelDto } from './dto/update-hotel.dto';
+import { HotelsService } from './hotels.service';
+import { Hotels } from './schema/hotels.schema';
 
 @Controller('api/hotels')
 export class HotelsController {

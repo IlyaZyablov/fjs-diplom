@@ -4,12 +4,12 @@ import {
   NotFoundException,
 } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
-import { Hotels } from './schema/hotels.schema';
 import mongoose, { Model } from 'mongoose';
-import { CreateHotelDto } from './dto/create-hotel.dto';
 import { ID } from '../../infrastructure/global';
-import { UpdateHotelDto } from './dto/update-hotel.dto';
+import { CreateHotelDto } from './dto/create-hotel.dto';
 import { SearchParamsDto } from './dto/search-hotel.dto';
+import { UpdateHotelDto } from './dto/update-hotel.dto';
+import { Hotels } from './schema/hotels.schema';
 
 @Injectable()
 export class HotelsService {

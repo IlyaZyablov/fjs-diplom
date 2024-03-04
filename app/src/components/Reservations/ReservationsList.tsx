@@ -1,10 +1,10 @@
-import { useEffect, useState } from "react";
-import useFetchData from "../../api/useFetchData";
-import { useNavigate } from "react-router-dom";
 import iziToast from "izitoast";
+import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import useFetchData from "../../api/useFetchData";
+import { useAppSelector } from "../../store/hooks";
 import LoaderMain from "../Loader/LoaderMain";
 import ReservationsTable from "./ReservationsTable";
-import { useAppSelector } from "../../store/hooks";
 
 function ReservationsList() {
   const [error, setError] = useState<boolean>(false);

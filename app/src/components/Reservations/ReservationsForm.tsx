@@ -1,9 +1,9 @@
-import { useState } from "react";
-import { Button, Container, Form } from "react-bootstrap"
-import { useAppSelector } from "../../store/hooks";
-import useFetchData from "../../api/useFetchData";
 import iziToast from "izitoast";
+import { useState } from "react";
+import { Button, Container, Form } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
+import useFetchData from "../../api/useFetchData";
+import { useAppSelector } from "../../store/hooks";
 
 function ReservationsForm() {
   const [dateStart, setDateStart] = useState<string>('');

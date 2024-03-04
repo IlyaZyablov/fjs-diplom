@@ -1,13 +1,13 @@
-import { useAppDispatch, useAppSelector } from "../../../store/hooks";
-import useFetchData from "../../../api/useFetchData";
-import { Link, useLocation, useNavigate } from "react-router-dom";
-import { useEffect, useState } from "react";
 import iziToast from "izitoast";
-import LoaderMain from "../../Loader/LoaderMain";
-import HotelsListItem from "../HotelsList/HotelsListItem";
+import { useEffect, useState } from "react";
 import { Button, Container } from "react-bootstrap";
-import HotelRoomsList from "../HotelRooms/HotelRoomsList";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import useFetchData from "../../../api/useFetchData";
+import { useAppDispatch, useAppSelector } from "../../../store/hooks";
 import { setHotelsState } from "../../../store/hotels/hotelsSlice";
+import LoaderMain from "../../Loader/LoaderMain";
+import HotelRoomsList from "../HotelRooms/HotelRoomsList";
+import HotelsListItem from "../HotelsList/HotelsListItem";
 
 function HotelPageMain() {
   const [error, setError] = useState<boolean>(false);

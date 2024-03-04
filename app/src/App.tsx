@@ -1,29 +1,34 @@
+import { useEffect } from "react";
+import { Col, Container, Row } from "react-bootstrap";
 import {
   BrowserRouter,
-  Routes,
   Route,
+  Routes,
 } from "react-router-dom";
-import HeaderMain from "./components/Header/HeaderMain";
-import { Col, Container, Row } from "react-bootstrap";
-import MenuMain from "./components/Menu/MenuMain";
-import UsersMain from "./components/Users/UsersMain";
-import HotelsListMain from "./components/Hotels/HotelsList/HotelsListMain";
-import HotelsSearch from "./components/Hotels/HotelsSearch/HotelsSearchMain";
-import HotelsAdd from "./components/Hotels/HotelsAdd/HotelsAddMain";
-import ErrorMain from "./components/Error/ErrorMain";
-import { useAppDispatch } from "./store/hooks";
-import { getToken } from "./helpers/localStorage.helpers";
 import useFetchData from "./api/useFetchData";
-import { login, logout } from "./store/user/userSlice";
-import { useEffect } from "react";
+import ChatMain from "./components/Chat/ChatMain";
+import ErrorMain from "./components/Error/ErrorMain";
+import HeaderMain from "./components/Header/HeaderMain";
 import HotelPageMain from "./components/Hotels/HotelPage/HotelPageMain";
-import HotelsRoomsAddMain from "./components/Hotels/HotelsRoomsAdd/HotelsRoomsAddMain";
-import HotelsUpdateMain from "./components/Hotels/HotelsUpdate/HotelsUpdateMain";
 import HotelRoomUpdateMain from "./components/Hotels/HotelRoomUpdate/HotelRoomUpdateMain";
-import ReservationsMain from "./components/Reservations/ReservationsMain";
+import HotelsAdd from "./components/Hotels/HotelsAdd/HotelsAddMain";
+import HotelsListMain from "./components/Hotels/HotelsList/HotelsListMain";
+import HotelsRoomsAddMain from "./components/Hotels/HotelsRoomsAdd/HotelsRoomsAddMain";
+import HotelsSearch from "./components/Hotels/HotelsSearch/HotelsSearchMain";
+import HotelsUpdateMain from "./components/Hotels/HotelsUpdate/HotelsUpdateMain";
+import MenuMain from "./components/Menu/MenuMain";
 import ReservationsForm from "./components/Reservations/ReservationsForm";
+import ReservationsMain from "./components/Reservations/ReservationsMain";
+import SupportMain from "./components/Support/SupportMain";
+import UsersMain from "./components/Users/UsersMain";
+import { getToken } from "./helpers/localStorage.helpers";
+import { SocketClient } from "./socket/SocketClient";
+import { useAppDispatch } from "./store/hooks";
+import { login, logout } from "./store/user/userSlice";
 
 function App() {
+  SocketClient();
+
   const dispatch = useAppDispatch();
   const { authUser } = useFetchData();
 
@@ -75,6 +80,8 @@ function App() {
               <Route path="/hotel" element={<HotelPageMain />} />
               <Route path="/reservations" element={<ReservationsMain />} />
               <Route path="/reserve-room" element={<ReservationsForm />} />
+              <Route path="/requests" element={<SupportMain />} />
+              <Route path="/chat" element={<ChatMain />} />
               <Route path="*" element={<ErrorMain />} />
             </Routes>
           </Col>

@@ -1,9 +1,9 @@
+import iziToast from "izitoast";
 import { useEffect, useState } from "react";
 import useFetchData from "../../../api/useFetchData";
-import iziToast from "izitoast";
-import LoaderMain from "../../Loader/LoaderMain";
 import { useAppDispatch, useAppSelector } from "../../../store/hooks";
 import { setHotelsState } from "../../../store/hotels/hotelsSlice";
+import LoaderMain from "../../Loader/LoaderMain";
 import HotelsListItems from "./HotelsListItems";
 
 function HotelsList() {

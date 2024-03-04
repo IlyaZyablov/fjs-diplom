@@ -1,6 +1,6 @@
-import { Container } from "react-bootstrap"
-import HotelsSearchForm from "./HotelsSearchForm"
+import { Container } from "react-bootstrap";
 import HotelsList from "../HotelsList/HotelsList";
+import HotelsSearchForm from "./HotelsSearchForm";
 
 function HotelsSearch() {
   return (

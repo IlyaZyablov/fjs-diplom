@@ -4,12 +4,12 @@ import {
   NotFoundException,
 } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
-import { HotelRooms } from './schema/hotelrooms.schema';
 import mongoose, { Model } from 'mongoose';
-import { CreateRoomDto } from './dto/create-room.dto';
 import { ID } from '../../infrastructure/global';
-import { UpdateRoomDto } from './dto/update-room.dto';
+import { CreateRoomDto } from './dto/create-room.dto';
 import { SearchRoomParamsDto } from './dto/search-room.dto';
+import { UpdateRoomDto } from './dto/update-room.dto';
+import { HotelRooms } from './schema/hotelrooms.schema';
 
 @Injectable()
 export class HotelroomsService {
@@ -28,8 +28,13 @@ export class HotelroomsService {
       isEnabled: true,
     };
 
-    const createdRoom = new this.hotelroomsModel(data);
-    return createdRoom.save();
+    try {
+      const createdRoom = new this.hotelroomsModel(data);
+      return createdRoom.save();
+    } catch (e) {
+      console.log('[ERROR]: HotelroomsService.create error:');
+      console.error(e);
+    }
   }
 
   async update(

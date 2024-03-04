@@ -1,7 +1,7 @@
-import { Button, Col, Container, Row } from "react-bootstrap"
+import { Button, Col, Container, Row } from "react-bootstrap";
+import { Link } from "react-router-dom";
 import { HotelData } from "../../../types/interfaces";
 import HotelsListItemImgs from "./HotelsListItemImgs";
-import { Link } from "react-router-dom";
 
 function HotelsListItem({ hotel, showBtn }: { hotel: HotelData, showBtn: boolean }) {  
   return (

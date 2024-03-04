@@ -1,11 +1,11 @@
 import iziToast from "izitoast";
 import { useState } from "react";
 import { Button, Form } from "react-bootstrap";
-import { RegData } from "../../types/interfaces";
+import { useNavigate } from "react-router-dom";
 import useFetchData from "../../api/useFetchData";
 import { useAppDispatch } from "../../store/hooks";
 import { login } from "../../store/user/userSlice";
-import { useNavigate } from "react-router-dom";
+import { RegData } from "../../types/interfaces";
 
 function FormRegister() {
   const [regData, setRegData] = useState<RegData>({

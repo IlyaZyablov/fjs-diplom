@@ -7,14 +7,14 @@ import {
   Query,
   UseGuards,
 } from '@nestjs/common';
-import { UsersService } from './users.service';
-import { Users } from './schema/users.schema';
+import { Roles } from '../../decorators/roles.decorator';
 import { JwtAuthGuard } from '../../guard/auth.guard';
+import { RolesGuard } from '../../guard/roles.guard';
+import { ID } from '../../infrastructure/global';
 import { SearchUsersDto } from './dto/search-user.dto';
 import { UpdateRoleDto } from './dto/update-role.dto';
-import { ID } from '../../infrastructure/global';
-import { RolesGuard } from '../../guard/roles.guard';
-import { Roles } from '../../decorators/roles.decorator';
+import { Users } from './schema/users.schema';
+import { UsersService } from './users.service';
 
 @Controller('api/users')
 @UseGuards(JwtAuthGuard, RolesGuard)
